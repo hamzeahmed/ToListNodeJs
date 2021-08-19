@@ -7,6 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    <h3>The Days Is <%= kindaDay %></h3>
+    <h1><%= kindOfDay %></h1>
+    <ul>
+        <li>Eat Food</li>
+        <li>Cook Food</li>
+        <li>Buy Food</li>
+        <% for(var i= 0; i<newListItem.length; i++){ %>
+            <li><%=newListItem[i]%></li>
+        <%}%>
+        <form action="/" method="POST">
+            <input type="text" name="newItem" placeholder="Wahts do you want ot add">
+            <button type="submit">Add</button>
+        </form>
+    </ul>
 </body>
 </html>
