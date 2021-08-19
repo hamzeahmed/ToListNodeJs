@@ -5,20 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1><%= kindOfDay %></h1>
-    <ul>
-        <li>Eat Food</li>
-        <li>Cook Food</li>
-        <li>Buy Food</li>
+    <div class="box">
+        <h1 id="heading"><%= kindOfDay %></h1>
+    </div>
+    <div class="box">
         <% for(var i= 0; i<newListItem.length; i++){ %>
-            <li><%=newListItem[i]%></li>
-        <%}%>
-        <form action="/" method="POST">
-            <input type="text" name="newItem" placeholder="Wahts do you want ot add">
-            <button type="submit">Add</button>
-        </form>
-    </ul>
+            <div class="item">
+                <input type="checkbox" >
+                <p><%=newListItem[i]%></p>
+            </div>
+            <%}%>
+            <form action="/" method="POST" class="item">
+                <input type="text" name="newItem" placeholder="Wahts do you want ot add">
+                <button type="submit">+</button>
+            </form>
+        
+    </div>
+    
 </body>
 </html>
