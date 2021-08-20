@@ -1,33 +1,44 @@
 const express = require('express');
 const myBodyParser = require("body-parser");
-
+const date = require(__dirname+'/date.js');
+console.log(date)
 const app = express()
 app.set('view engine', 'ejs');
-
 app.use(express.static("public"))
 app.use(express.urlencoded({extended: true}));
-let items = [];
+const items = [];
+const workItems = [];
 app.get('/',(req,res)=>{
-    const tody = new Date();
-    const currentDay = tody.getDay();
-    let options = {
-        weekday: "long",
-        day: "numeric",
-        month: "long"
-    }
-    let day = tody.toLocaleDateString("en-US", options);
+    console.log(date())
+    day = date()
     res.render('list', {
-        kindOfDay: day,
+        ListTitle: day,
         newListItem: items
     });
-
-    app.post('/',(req,res)=>{
-        const newItem = req.body.newItem;
-        items.push(newItem)
-        res.redirect('/')
-    });
-
 });
+app.post('/',(req,res)=>{
+    const newItem = req.body.newItem;
+    if(req.body.buttonPost === 'Work'){
+        workItems.push(newItem);
+        res.redirect('/work');
+    }else{
+        items.push(newItem);
+        res.redirect('/');
+    }
+    
+});
+
+app.get('/work',(req,res)=>{
+    let title = "Work"
+    res.render('list',{
+        ListTitle: title,
+        newListItem: workItems
+    });
+});
+
+app.get('/about', (req, res) =>{
+    res.render("about")
+})
 app.listen(3000, ()=>{
-    console.log('welcome ');
+    console.log('Listining Posrt 3000! ');
 })  
